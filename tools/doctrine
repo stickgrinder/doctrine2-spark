@@ -1,0 +1,13 @@
+#!/usr/bin/env php
+<?php
+
+$spark_info['sparkpath'] = 'sparks';  // relative to this script
+$spark_info['sparkname'] = 'doctrine2'; // the machine name, equals spark directory
+$spark_info['sparkver']  = '1.0'; // version you want to use, could differ from latest one
+
+// CLI scripts will have a clue on where to find libraries
+define('BASEPATH', dirname(__DIR__));
+define('SPARKROOT', BASEPATH.'/'.implode('/',$spark_info));
+
+// include CLI scripts and configuration
+include('lib/doctrine2/doctrine.php');
