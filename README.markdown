@@ -1,6 +1,6 @@
 This Spark seamlessly integrates Doctrine2 ORM in CI2.
-Doctrine2 is a powerful ORM based on DataMapper pattern, providing database abstraction, entities-based ORM complete with an entity manager, and a powerful command line tool to automate many tasks.
-This spark contains both Doctrine2 library and the CLI tool, but to make it work you'll have to copy some files by hand.
+Doctrine2 is a powerful ORM tool based on the DataMapper pattern that provides a database abstraction layer and an entities/document-based object-relational mapping library, together with a powerful command line tool that helps automating several different tasks.
+This spark contains both Doctrine2 library and the CLI tool, but in order to make it work you'll have to manually copy some files.
 
 ## Installation and configuration
 
@@ -10,14 +10,14 @@ After installing this Spark, create a directory called `proxies` inside your `ap
     $ mkdir ./application/models/proxies
     $ chmod a+w ./application/models/proxies
 
-You could use this Spark as any other, by loading it in your controller:
+You can use this Spark as usual by loading it in your controller:
 
     $this->load->sparks('doctrine2');
 
     // entity manager is loaded
     $this->doctrine2->em(...);
 
-To make access to entity manager more comfortable, use this:
+In order to give a more comfortable access to the entity manager, you can use the following code:
 
     $this->load->sparks('doctrine2');
     $this->em = $this->doctrine2->em;
@@ -36,17 +36,17 @@ To enable CLI tool, follow these instructions:
 
     $ tools/doctrine COMMAND PARAMS
 
-Remember that your model entities will have to be placed in `application/models` directory, while generated proxies will be put in `application/models/proxies` directory.
+Remember that the entities in your model must reside in the `application/models` directory, while the generated proxies will be in `application/models/proxies` directory.
 
 ## Known bugs and roadmap
 
-There is no known bugs so far, but some feature is missing from a "standard" `application/libraries`-based installation.
+There are no known bugs so far, but some features are missing in order to get to a "standard" `application/libraries`-based installation.
 
-* Autoloading of Doctrine library doesn't works out of the box. You should manually load the spark every time you need it. You could always do this in your controller constructor, so that you avoid too much code duplication.
-* You could think about implementing MY_Controller to extend standard controller and load the Entity Manager in all of the controllers without explicitly loading the spark; I tried but this doesn't work, since MY_Loader (that is how sparks extends CI loading mechanism) is loaded *after* MY_Controller, so `$this->load->spark()` is unavailable at this stage. I also tried with a `post_controller_constructor` hook but: 1) something didn't work and 2) this is an awful workaround and the right way is to getting sparks autoloading functionality to work as intended. This will therefore be addressed in a future release.
-* I'd like to have the Entity Manager automatically available in all controllers via `$this->em` if Doctrine2 spark is autoloaded, but I'll have to solve previous point, obviously.
+* Autoloading of Doctrine library doesn't work out of the box. You should manually load the Spark every time you need it. You might think aboutdoing such thing in your controller constructor, in order to avoid code duplication.
+* You could think about implementing MY_Controller to extend standard controller and load the Entity Manager in every controller without explicitly loading the spark; I tried but this doesn't work, since MY_Loader (that is how sparks extends CI loading mechanism) is loaded *after* MY_Controller, so `$this->load->spark()` is unavailable at this stage. I also tried with a `post_controller_constructor` hook but: 1) something didn't work and 2) this is an awful workaround and the right way is to getting Sparks autoloading functionality to work as intended. This will therefore be addressed in a future release.
+* I'd like to have the Entity Manager automatically available in all controllers via `$this->em` if Doctrine2 Spark is autoloaded, but I'll have to solve previous point, obviously.
 
-If you could find solutions to above problems, please contact me or send a pull request on GitHub project page:
+If you're able to find a solution for the problems above, please contact me or send a pull request on GitHub project page:
 [https://github.com/stickgrinder/doctrine2-spark](https://github.com/stickgrinder/doctrine2-spark)
 
 ## Resources and further readings:
