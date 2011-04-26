@@ -7,7 +7,7 @@ $spark_info['sparkver']  = '1.0'; // version you want to use, could differ from 
 
 // CLI scripts will have a clue on where to find libraries
 define('BASEPATH', dirname(__DIR__));
-define('SPARKROOT', BASEPATH.'/'.implode('/',$spark_info));
+define('SPARK_DOCTRINE2_PATH', BASEPATH.'/'.implode('/',$spark_info));
 
 // include CLI scripts and configuration
 include('lib/doctrine2/doctrine.php');

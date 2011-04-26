@@ -6,9 +6,9 @@ use Doctrine\Common\ClassLoader,
     Doctrine\DBAL\Logging\EchoSqlLogger;
 
 require_once BASEPATH . '/application/config/database.php';
-require_once SPARKROOT . '/vendors/Doctrine/Common/ClassLoader.php';
+require_once SPARK_DOCTRINE2_PATH . '/vendors/Doctrine/Common/ClassLoader.php';
 
-$doctrineClassLoader = new ClassLoader('Doctrine',  SPARKROOT.'/vendors');
+$doctrineClassLoader = new ClassLoader('Doctrine',  SPARK_DOCTRINE2_PATH.'/vendors');
 $doctrineClassLoader->register();
 $entitiesClassLoader = new ClassLoader('models', BASEPATH.'/application');
 $entitiesClassLoader->register();

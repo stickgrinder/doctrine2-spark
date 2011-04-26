@@ -1,6 +1,6 @@
 <?php
 
-chdir(SPARKROOT . '/vendors');
+chdir(SPARK_DOCTRINE2_PATH . '/vendors');
 
 require_once 'Doctrine/Common/ClassLoader.php';
 
