@@ -1,10 +1,22 @@
-This Spark seamlessly integrates Doctrine2 ORM in CI2.
+This Spark seamlessly integrates Doctrine2 ORM and Doctrine2 Extensions in CI2.
 Doctrine2 is a powerful ORM tool based on the DataMapper pattern that provides a database abstraction layer and an entities/document-based object-relational mapping library, together with a powerful command line tool that helps automating several different tasks.
 This spark contains both Doctrine2 library and the CLI tool, but in order to make it work you'll have to manually copy some files.
+Doctrine2 Extensions implement several Doctrine 1-like behaviors in Doctrine 2 such as Translatable, Sluggable, Tree - NestedSet, Timestampable, Loggable.
 
 ## Installation and configuration
 
-After installing this Spark, create a directory called `proxies` inside your `application/models` folder and make it writable:
+After installing this Spark, you need to download Doctrine 2 (ORM, DBAL and Common libraries) and put it in this Spark's vendors folder.
+One possible way to have all the stuff in place consists in:
+
+- cloning the official github repository into sparks/doctrine2/CURRENT.VERSION/vendors by typing _git clone https://github.com/doctrine/doctrine2 Doctrine_
+- updating the submodules by typing, in the sparks/doctrine2/CURRENT.VERSION folder, _git submodule update_
+- soft linking the common and dbal libraries in the proper location by typing:
+  - _ln -s /PATH/TO/YOUR/CI2/APPLICATION/sparks/doctrine2/CURRENT.VERSION/vendors/Doctrine/lib/vendor/doctrine-common /PATH/TO/YOUR/CI2/APPLICATION/sparks/doctrine2/CURRENT.VERSION/vendors/Doctrine/lib/Doctrine/Common_
+  - _ln -s /PATH/TO/YOUR/CI2/APPLICATION/sparks/doctrine2/CURRENT.VERSION/vendors/Doctrine/lib/vendor/doctrine-dbal /PATH/TO/YOUR/CI2/APPLICATION/sparks/doctrine2/CURRENT.VERSION/vendors/Doctrine/lib/Doctrine/DBAL_
+
+In other words, your **/PATH/TO/YOUR/CI2/APPLICATION/sparks/doctrine2/CURRENT.VERSION/vendors/Doctrine/lib/Doctrine/** folder should contain the **Common** and **DBAL** soft links (or folders if you choose to copy them somewhat differently) and the **ORM** folder.
+
+Then create a directory called `proxies` inside your `application/models` folder and make it writable:
 
     $ cd /path/to/your/ci2/installation
     $ mkdir ./application/models/proxies
@@ -27,10 +39,9 @@ In order to give a more comfortable access to the entity manager, you can use th
 
 To enable CLI tool, follow these instructions:
 
-- Copy `tools` folder from Spark directory to your CI2 installation path (if you're using Sparks you should already have a `tools` directory in your installation path):
+- Link `doctrine` command from Spark directory to your CI2 installation path (if you're using Sparks you should already have a `tools` directory in your installation path):
 
-    $ cd /path/to/your/ci2/installation
-    $ cp ./sparks/doctrine2/<CURRENT-VERSION>/tools . -R
+    $ ln -s /PATH/TO/YOUR/CI2/APPLICATION/sparks/doctrine2/CURRENT.VERSION/tools/doctrine /PATH/TO/YOUR/CI2/APPLICATION/tools/
 
 - Use the CLI tool from your `tools` directory:
 
@@ -45,6 +56,7 @@ There are no known bugs so far, but some features are missing in order to get to
 * Autoloading of Doctrine library doesn't work out of the box. You should manually load the Spark every time you need it. You might think aboutdoing such thing in your controller constructor, in order to avoid code duplication.
 * You could think about implementing MY_Controller to extend standard controller and load the Entity Manager in every controller without explicitly loading the spark; I tried but this doesn't work, since MY_Loader (that is how sparks extends CI loading mechanism) is loaded *after* MY_Controller, so `$this->load->spark()` is unavailable at this stage. I also tried with a `post_controller_constructor` hook but: 1) something didn't work and 2) this is an awful workaround and the right way is to getting Sparks autoloading functionality to work as intended. This will therefore be addressed in a future release.
 * I'd like to have the Entity Manager automatically available in all controllers via `$this->em` if Doctrine2 Spark is autoloaded, but I'll have to solve previous point, obviously.
+* Implement all the extensions in Doctrine 2 object. Not that much work but as of now I only had time to use and test Translatable.
 
 If you're able to find a solution for the problems above, please contact me or send a pull request on GitHub project page:
 [https://github.com/stickgrinder/doctrine2-spark](https://github.com/stickgrinder/doctrine2-spark)
@@ -60,6 +72,6 @@ With such a doc, you won't have no excuses, so RTFM! >;)
 
 ## Contacts and footnotes
 
-This Spark has been "sponsored" by [Agavee Team](http://www.agavee.com), written by Paolo Pustorino (hey, that's me! :) follow @stickgrinder tweets) and it's hosted on GitHub.
+This Spark has been sponsored by [Agavee Team](http://www.agavee.com), written by Paolo Pustorino and Claudio Beatrice, follow @stickgrinder and @omissis tweets.
 
 Thanks to Joseph Wynn for his clear tutorial, and thanks to all that will find (and fix!) bugs, send me nice twits and offer me some beer&pizza! :)

@@ -1,0 +1,9 @@
+[submodule "vendors/DoctrineExtensions"]
+	path = vendors/DoctrineExtensions
+	url = https://github.com/l3pp4rd/DoctrineExtensions.git
+[submodule "vendors/doctrine2"]
+	path = vendors/doctrine2
+	url = https://github.com/doctrine/doctrine2.git
+[submodule "vendors/Doctrine"]
+	path = vendors/Doctrine
+	url = https://github.com/doctrine/doctrine2.git

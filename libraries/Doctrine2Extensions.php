@@ -10,14 +10,14 @@ class Doctrine2Extensions {
   }
   
   private function extensionsAutoload() {
-    $classLoader = new \Doctrine\Common\ClassLoader('Gedmo', LIB_PATH_TODO);
+    $classLoader = new \Doctrine\Common\ClassLoader('Gedmo', SPARK_DOCTRINE2_PATH . '/vendors/DoctrineExtensions/lib');
     $classLoader->register();
   }
   
   private function addTranslatableDriver(\Doctrine\ORM\Configuration $doctrineOrmConfig) {
     $chainDriverImpl = new \Doctrine\ORM\Mapping\Driver\DriverChain();
     $translatableDriverImpl = $doctrineOrmConfig->newDefaultAnnotationDriver(
-      LIB_PATH_TODO . '/Gedmo/Translatable/Entity'
+      SPARK_DOCTRINE2_PATH . '/DoctrineExtensions/lib/Gedmo/Translatable/Entity'
     );
     $chainDriverImpl->addDriver($translatableDriverImpl, 'Gedmo\Translatable');
     $doctrineOrmConfig->setMetadataDriverImpl($chainDriverImpl);

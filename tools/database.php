@@ -1,0 +1,1 @@
+/Users/omissis/Sites/agavee/makler-zentrum/mz-nova11/application/config/database.php
