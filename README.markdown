@@ -13,14 +13,17 @@ One possible way to have all the stuff in place consists in:
 - soft linking the common and dbal libraries in the proper location by typing:
   - _ln -s /PATH/TO/YOUR/CI2/APPLICATION/sparks/doctrine2/CURRENT.VERSION/vendors/Doctrine/lib/vendor/doctrine-common /PATH/TO/YOUR/CI2/APPLICATION/sparks/doctrine2/CURRENT.VERSION/vendors/Doctrine/lib/Doctrine/Common_
   - _ln -s /PATH/TO/YOUR/CI2/APPLICATION/sparks/doctrine2/CURRENT.VERSION/vendors/Doctrine/lib/vendor/doctrine-dbal /PATH/TO/YOUR/CI2/APPLICATION/sparks/doctrine2/CURRENT.VERSION/vendors/Doctrine/lib/Doctrine/DBAL_
+-soft linking your database configuration so that doctrine cli can access it:
+  - _ln -s /PATH/TO/YOUR/CI2/APPLICATION/config/database.php /PATH/TO/YOUR/CI2/APPLICATION/sparks/doctrine2/CURRENT.VERSION/tools/
 
 In other words, your **/PATH/TO/YOUR/CI2/APPLICATION/sparks/doctrine2/CURRENT.VERSION/vendors/Doctrine/lib/Doctrine/** folder should contain the **Common** and **DBAL** soft links (or folders if you choose to copy them somewhat differently) and the **ORM** folder.
 
-Then create a directory called `proxies` inside your `application/models` folder and make it writable:
+Then create a directory called `Entities` and a directory called`Proxies` inside your `application/models` folder and make the latter writable:
 
     $ cd /path/to/your/ci2/installation
-    $ mkdir ./application/models/proxies
-    $ chmod a+w ./application/models/proxies
+    $ mkdir ./application/models/Entities
+    $ mkdir ./application/models/Proxies
+    $ chmod a+w ./application/models/Proxies
 
 You can use this Spark as usual by loading it in your controller:
 
@@ -74,4 +77,4 @@ With such a doc, you won't have no excuses, so RTFM! >;)
 
 This Spark has been sponsored by [Agavee Team](http://www.agavee.com), written by Paolo Pustorino and Claudio Beatrice, follow @stickgrinder and @omissis tweets.
 
-Thanks to Joseph Wynn for his clear tutorial, and thanks to all that will find (and fix!) bugs, send me nice twits and offer me some beer&pizza! :)
+Thanks to Joseph Wynn for his clear tutorial, and thanks to all that will find (and fix!) bugs, send me nice tweets and offer me some beer&pizza! :)

@@ -12,7 +12,7 @@ $classLoader = new \Doctrine\Common\ClassLoader('Symfony', DOCTRINE_LIB_DIR . '/
 $classLoader->register();
 $classLoader = new \Doctrine\Common\ClassLoader('Entity', BASEPATH . '/application/models');
 $classLoader->register();
-$classLoader = new \Doctrine\Common\ClassLoader('Proxy', BASEPATH . '/application/models');
+$classLoader = new \Doctrine\Common\ClassLoader('Proxies', BASEPATH . '/application/models');
 $classLoader->register();
 $classLoader = new \Doctrine\Common\ClassLoader('Gedmo', DOCTRINE_EXTENSIONS_LIB_DIR);
 $classLoader->register();
