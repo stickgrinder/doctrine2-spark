@@ -6,17 +6,22 @@ Doctrine2 Extensions implement several Doctrine 1-like behaviors in Doctrine 2 s
 ## Installation and configuration
 
 After installing this Spark, you need to download Doctrine 2 (ORM, DBAL and Common libraries) and put it in this Spark's vendors folder.
-One possible way to have all the stuff in place consists in:
+Open a terminal and type the following commands (replace /PATH/TO/YOUR/CI2/APPLICATION with the actual path on your filesystem): 
 
-- cloning the official github repository into sparks/doctrine2/CURRENT.VERSION/vendors by typing _git clone https://github.com/doctrine/doctrine2 Doctrine_
-- updating the submodules by typing, in the sparks/doctrine2/CURRENT.VERSION folder, _git submodule update_
-- soft linking the common and dbal libraries in the proper location by typing:
-  - _ln -s /PATH/TO/YOUR/CI2/APPLICATION/sparks/doctrine2/CURRENT.VERSION/vendors/Doctrine/lib/vendor/doctrine-common /PATH/TO/YOUR/CI2/APPLICATION/sparks/doctrine2/CURRENT.VERSION/vendors/Doctrine/lib/Doctrine/Common_
-  - _ln -s /PATH/TO/YOUR/CI2/APPLICATION/sparks/doctrine2/CURRENT.VERSION/vendors/Doctrine/lib/vendor/doctrine-dbal /PATH/TO/YOUR/CI2/APPLICATION/sparks/doctrine2/CURRENT.VERSION/vendors/Doctrine/lib/Doctrine/DBAL_
--soft linking your database configuration so that doctrine cli can access it:
-  - _ln -s /PATH/TO/YOUR/CI2/APPLICATION/config/database.php /PATH/TO/YOUR/CI2/APPLICATION/sparks/doctrine2/CURRENT.VERSION/tools/
+- CI2APP=/PATH/TO/YOUR/CI2/APPLICATION
+- D2SPARK=$CI2APP/sparks/doctrine2/CURRENT.VERSION
+- cd $D2SPARK
+- git submodule init
+- git submodule update
+- cd vendors/Doctrine
+- git submodule init
+- git submodule update
+- D2LIB=$D2SPARK/vendors/Doctrine/lib
+- ln -s $D2LIB/vendor/doctrine-common/lib/Doctrine/Common $D2LIB/Doctrine/
+- ln -s $D2LIB/vendor/doctrine-dbal/lib/Doctrine/DBAL $D2LIB/Doctrine/
+- ln -s $CI2APP/config/database.php $D2SPARK/tools/
 
-In other words, your **/PATH/TO/YOUR/CI2/APPLICATION/sparks/doctrine2/CURRENT.VERSION/vendors/Doctrine/lib/Doctrine/** folder should contain the **Common** and **DBAL** soft links (or folders if you choose to copy them somewhat differently) and the **ORM** folder.
+In other words, your **$D2LIB/Doctrine/** folder should contain the **Common** and **DBAL** soft links (or folders if you choose to copy them somewhat differently) and the **ORM** folder.
 
 Then create a directory called `Entities` and a directory called`Proxies` inside your `application/models` folder and make the latter writable:
 
@@ -44,7 +49,7 @@ To enable CLI tool, follow these instructions:
 
 - Link `doctrine` command from Spark directory to your CI2 installation path (if you're using Sparks you should already have a `tools` directory in your installation path):
 
-    $ ln -s /PATH/TO/YOUR/CI2/APPLICATION/sparks/doctrine2/CURRENT.VERSION/tools/doctrine /PATH/TO/YOUR/CI2/APPLICATION/tools/
+    $ ln -s $D2SPARK/tools/doctrine $CI2APP
 
 - Use the CLI tool from your `tools` directory:
 
